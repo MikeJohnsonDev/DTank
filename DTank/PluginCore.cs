@@ -11,6 +11,7 @@ namespace DFilter
 
         public event EventHandler GameEventMessageBox;
 
+
         public event EventHandler GameEventLoginCharacter;
 
         #endregion Public Fields + Events

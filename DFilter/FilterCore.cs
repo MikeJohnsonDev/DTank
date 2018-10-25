@@ -4,632 +4,641 @@ using System.Reflection;
 
 namespace DFilter
 {
-	[FriendlyName("DFilter")]
-	public sealed class FilterCore : FilterBase
-	{
-		#region Public Fields + Events
+    [FriendlyName("DFilter")]
+    public sealed class FilterCore : FilterBase
+    {
+        #region Public Fields + Events
 
-		public event EventHandler GameEventLoginCharacter;
+        public event EventHandler GameEventMessageBox;
 
-		#endregion Public Fields + Events
+        public event EventHandler GameEventLoginCharacter;
 
-		#region Protected Methods
+        #endregion Public Fields + Events
 
-		protected override void Shutdown()
-		{
-		}
+        #region Protected Methods
 
-		protected override void Startup()
-		{
-			ClientDispatch += OnClientDispatch;
-			ServerDispatch += OnServerDispatch;
-		}
+        protected override void Shutdown()
+        {
+        }
 
-		#endregion Protected Methods
+        protected override void Startup()
+        {
+            ClientDispatch += OnClientDispatch;
+            ServerDispatch += OnServerDispatch;
+        }
 
-		#region Private Methods
+        #endregion Protected Methods
 
-		private void DispatchGameAction(Message message)
-		{
-			GameActionType gameActionType = (GameActionType)message["action"];
+        #region Private Methods
 
-			switch (gameActionType)
-			{
-				case GameActionType.SetSingleCharacterOption:
-					break;
+        private void DispatchGameAction(Message message)
+        {
+            GameActionType gameActionType = (GameActionType)message["action"];
 
-				case GameActionType.SetAfkMessage:
-					break;
+            switch (gameActionType)
+            {
+                case GameActionType.SetSingleCharacterOption:
+                    break;
 
-				case GameActionType.StoreItem:
-					break;
+                case GameActionType.SetAfkMessage:
+                    break;
 
-				case GameActionType.EquipItem:
-					break;
+                case GameActionType.StoreItem:
+                    break;
 
-				case GameActionType.DropItem:
-					break;
+                case GameActionType.EquipItem:
+                    break;
 
-				case GameActionType.UseItem:
-					break;
+                case GameActionType.DropItem:
+                    break;
 
-				case GameActionType.RaiseVital:
-					break;
+                case GameActionType.UseItem:
+                    break;
 
-				case GameActionType.RaiseAttribute:
-					break;
+                case GameActionType.RaiseVital:
+                    break;
 
-				case GameActionType.RaiseSkill:
-					break;
+                case GameActionType.RaiseAttribute:
+                    break;
 
-				case GameActionType.TrainSkill:
-					break;
+                case GameActionType.RaiseSkill:
+                    break;
 
-				case GameActionType.CastSpell:
-					break;
+                case GameActionType.TrainSkill:
+                    break;
 
-				case GameActionType.CastSpellOnObject:
-					break;
+                case GameActionType.CastSpell:
+                    break;
 
-				case GameActionType.Materialize:
-					break;
+                case GameActionType.CastSpellOnObject:
+                    break;
 
-				case GameActionType.GiveItem:
-					break;
+                case GameActionType.Materialize:
+                    break;
 
-				case GameActionType.MakeShortcut:
-					break;
+                case GameActionType.GiveItem:
+                    break;
 
-				case GameActionType.RemoveShortcut:
-					break;
+                case GameActionType.MakeShortcut:
+                    break;
 
-				case GameActionType.SetCharacterOptions:
-					break;
+                case GameActionType.RemoveShortcut:
+                    break;
 
-				case GameActionType.AddSpellToSpellBar:
-					break;
+                case GameActionType.SetCharacterOptions:
+                    break;
 
-				case GameActionType.RemoveSpellFromSpellBar:
-					break;
+                case GameActionType.AddSpellToSpellBar:
+                    break;
 
-				default:
-					throw new ArgumentOutOfRangeException();
-			}
-		}
+                case GameActionType.RemoveSpellFromSpellBar:
+                    break;
 
-		private void DispatchGameEvent(Message message)
-		{
-			GameEventType gameEventType = (GameEventType)message["event"];
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
 
-			switch (gameEventType)
-			{
-				case GameEventType.MessageBox:
-					break;
+        private void DispatchGameEvent(Message message)
+        {
+            GameEventType gameEventType = (GameEventType)message["event"];
 
-				case GameEventType.LoginCharacter:
-					DispatchGameEventLoginCharacter(message);
-					break;
+            switch (gameEventType)
+            {
+                case GameEventType.MessageBox:
+                    DispatchGameEventMessageBox(message);
+                    break;
 
-				case GameEventType.TransactionMessage:
-					break;
+                case GameEventType.LoginCharacter:
+                    DispatchGameEventLoginCharacter(message);
+                    break;
 
-				case GameEventType.AllegianceInformation:
-					break;
+                case GameEventType.TransactionMessage:
+                    break;
 
-				case GameEventType.FriendsListUpdate:
-					break;
+                case GameEventType.AllegianceInformation:
+                    break;
 
-				case GameEventType.InsertInventoryItem:
-					break;
+                case GameEventType.FriendsListUpdate:
+                    break;
 
-				case GameEventType.WearItem:
-					break;
+                case GameEventType.InsertInventoryItem:
+                    break;
 
-				case GameEventType.TitleList:
-					break;
+                case GameEventType.WearItem:
+                    break;
 
-				case GameEventType.SetTitle:
-					break;
+                case GameEventType.TitleList:
+                    break;
 
-				case GameEventType.DirectChat:
-					break;
+                case GameEventType.SetTitle:
+                    break;
 
-				case GameEventType.AddSpellToSpellBookCastSpell:
-					break;
+                case GameEventType.DirectChat:
+                    break;
 
-				case GameEventType.DeleteSpellFromSpellBookObsolete:
-					break;
+                case GameEventType.AddSpellToSpellBookCastSpell:
+                    break;
 
-				case GameEventType.AddEnchantment:
-					break;
+                case GameEventType.DeleteSpellFromSpellBookObsolete:
+                    break;
 
-				case GameEventType.RemoveEnchantment:
-					break;
+                case GameEventType.AddEnchantment:
+                    break;
 
-				case GameEventType.CloseContainer:
-					break;
+                case GameEventType.RemoveEnchantment:
+                    break;
 
-				case GameEventType.ApproachVendor:
-					break;
+                case GameEventType.CloseContainer:
+                    break;
 
-				case GameEventType.EndPortalStormObsolete:
-					break;
+                case GameEventType.ApproachVendor:
+                    break;
 
-				case GameEventType.MildPortalStormObsolete:
-					break;
+                case GameEventType.EndPortalStormObsolete:
+                    break;
 
-				case GameEventType.HeavyPortalStormObsolete:
-					break;
+                case GameEventType.MildPortalStormObsolete:
+                    break;
 
-				case GameEventType.PortalStormedObsolete:
-					break;
+                case GameEventType.HeavyPortalStormObsolete:
+                    break;
 
-				case GameEventType.FailureToGiveItem:
-					break;
+                case GameEventType.PortalStormedObsolete:
+                    break;
 
-				case GameEventType.FellowshipMemberQuit:
-					break;
+                case GameEventType.FailureToGiveItem:
+                    break;
 
-				case GameEventType.FellowshipMemberDismissed:
-					break;
+                case GameEventType.FellowshipMemberQuit:
+                    break;
 
-				case GameEventType.QuitFellowship:
-					break;
+                case GameEventType.FellowshipMemberDismissed:
+                    break;
 
-				case GameEventType.CreateFellowshipObsolete:
-					break;
+                case GameEventType.QuitFellowship:
+                    break;
 
-				case GameEventType.RecruitMember:
-					break;
+                case GameEventType.CreateFellowshipObsolete:
+                    break;
 
-				case GameEventType.DismissMember:
-					break;
+                case GameEventType.RecruitMember:
+                    break;
 
-				case GameEventType.DisbandFellowshipObsolete:
-					break;
+                case GameEventType.DismissMember:
+                    break;
 
-				case GameEventType.ReadTableOfContents:
-					break;
+                case GameEventType.DisbandFellowshipObsolete:
+                    break;
 
-				case GameEventType.ReadPage:
-					break;
+                case GameEventType.ReadTableOfContents:
+                    break;
 
-				case GameEventType.IdentifyObject:
-					break;
+                case GameEventType.ReadPage:
+                    break;
 
-				case GameEventType.GroupChat:
-					break;
+                case GameEventType.IdentifyObject:
+                    break;
 
-				case GameEventType.GroupChatObsolete:
-					break;
+                case GameEventType.GroupChat:
+                    break;
 
-				case GameEventType.SetPackContents:
-					break;
+                case GameEventType.GroupChatObsolete:
+                    break;
 
-				case GameEventType.DropFromInventory:
-					break;
+                case GameEventType.SetPackContents:
+                    break;
 
-				case GameEventType.RemoveEnchantmentSilent:
-					break;
+                case GameEventType.DropFromInventory:
+                    break;
 
-				case GameEventType.RemoveMultipleEnchantmentsObsolete:
-					break;
+                case GameEventType.RemoveEnchantmentSilent:
+                    break;
 
-				case GameEventType.AttackCompleted:
-					break;
+                case GameEventType.RemoveMultipleEnchantmentsObsolete:
+                    break;
 
-				case GameEventType.DeleteSpellFromSpellBook:
-					break;
+                case GameEventType.AttackCompleted:
+                    break;
 
-				case GameEventType.YourDeath:
-					break;
+                case GameEventType.DeleteSpellFromSpellBook:
+                    break;
 
-				case GameEventType.KillDeathMessage:
-					break;
+                case GameEventType.YourDeath:
+                    break;
 
-				case GameEventType.RemoveMultipleEnchantmentsObsolete2:
-					break;
+                case GameEventType.KillDeathMessage:
+                    break;
 
-				case GameEventType.InflictMeleeDamage:
-					break;
+                case GameEventType.RemoveMultipleEnchantmentsObsolete2:
+                    break;
 
-				case GameEventType.ReceiveMeleeDamage:
-					break;
+                case GameEventType.InflictMeleeDamage:
+                    break;
 
-				case GameEventType.OtherMeleeEvade:
-					break;
+                case GameEventType.ReceiveMeleeDamage:
+                    break;
 
-				case GameEventType.SelfMeleeEvade:
-					break;
+                case GameEventType.OtherMeleeEvade:
+                    break;
 
-				case GameEventType.StartMeleeAttack:
-					break;
+                case GameEventType.SelfMeleeEvade:
+                    break;
 
-				case GameEventType.UpdateHealth:
-					break;
+                case GameEventType.StartMeleeAttack:
+                    break;
 
-				case GameEventType.AgeCommandResult:
-					break;
+                case GameEventType.UpdateHealth:
+                    break;
 
-				case GameEventType.ReadyPreviousActionComplete:
-					break;
+                case GameEventType.AgeCommandResult:
+                    break;
 
-				case GameEventType.UpdateAllegianceInfo:
-					break;
+                case GameEventType.ReadyPreviousActionComplete:
+                    break;
 
-				case GameEventType.CloseAssessPanel:
-					break;
+                case GameEventType.UpdateAllegianceInfo:
+                    break;
 
-				case GameEventType.PingReply:
-					break;
+                case GameEventType.CloseAssessPanel:
+                    break;
 
-				case GameEventType.SquelchedUsersList:
-					break;
+                case GameEventType.PingReply:
+                    break;
 
-				case GameEventType.EnterTrade:
-					break;
+                case GameEventType.SquelchedUsersList:
+                    break;
 
-				case GameEventType.EndTrade:
-					break;
+                case GameEventType.EnterTrade:
+                    break;
 
-				case GameEventType.AddTradeItem:
-					break;
+                case GameEventType.EndTrade:
+                    break;
 
-				case GameEventType.AcceptTrade:
-					break;
+                case GameEventType.AddTradeItem:
+                    break;
 
-				case GameEventType.UnAcceptTrade:
-					break;
+                case GameEventType.AcceptTrade:
+                    break;
 
-				case GameEventType.ResetTrade:
-					break;
+                case GameEventType.UnAcceptTrade:
+                    break;
 
-				case GameEventType.FailureToAddATradeItem:
-					break;
+                case GameEventType.ResetTrade:
+                    break;
 
-				case GameEventType.FailureToCompleteATrade:
-					break;
+                case GameEventType.FailureToAddATradeItem:
+                    break;
 
-				case GameEventType.DisplayDwellingPurchaseMaintenancePanel:
-					break;
+                case GameEventType.FailureToCompleteATrade:
+                    break;
 
-				case GameEventType.HouseInformationForOwners:
-					break;
+                case GameEventType.DisplayDwellingPurchaseMaintenancePanel:
+                    break;
 
-				case GameEventType.HouseInformationForNonOwners:
-					break;
+                case GameEventType.HouseInformationForOwners:
+                    break;
 
-				case GameEventType.HouseGuestList:
-					break;
+                case GameEventType.HouseInformationForNonOwners:
+                    break;
 
-				case GameEventType.UpdateItemManaBar:
-					break;
+                case GameEventType.HouseGuestList:
+                    break;
 
-				case GameEventType.HousesAvailable:
-					break;
+                case GameEventType.UpdateItemManaBar:
+                    break;
 
-				case GameEventType.ConfirmationPanel:
-					break;
+                case GameEventType.HousesAvailable:
+                    break;
 
-				case GameEventType.ConfirmationPanelClosed:
-					break;
+                case GameEventType.ConfirmationPanel:
+                    break;
 
-				case GameEventType.AllegianceMemberLoginOut:
-					break;
+                case GameEventType.ConfirmationPanelClosed:
+                    break;
 
-				case GameEventType.DisplayStatusMessage:
-					break;
+                case GameEventType.AllegianceMemberLoginOut:
+                    break;
 
-				case GameEventType.DisplayParameterizedStatusMessage:
-					break;
+                case GameEventType.DisplayStatusMessage:
+                    break;
 
-				case GameEventType.SetTurbineChatChannels:
-					break;
+                case GameEventType.DisplayParameterizedStatusMessage:
+                    break;
 
-				case GameEventType.Tell:
-					break;
+                case GameEventType.SetTurbineChatChannels:
+                    break;
 
-				case GameEventType.CreateFellowship:
-					break;
+                case GameEventType.Tell:
+                    break;
 
-				case GameEventType.DisbandFellowship:
-					break;
+                case GameEventType.CreateFellowship:
+                    break;
 
-				case GameEventType.AddFellowshipMember:
-					break;
+                case GameEventType.DisbandFellowship:
+                    break;
 
-				case GameEventType.AddSpellToSpellBook:
-					break;
+                case GameEventType.AddFellowshipMember:
+                    break;
 
-				case GameEventType.AddCharacterEnchantment:
-					break;
+                case GameEventType.AddSpellToSpellBook:
+                    break;
 
-				case GameEventType.RemoveCharacterEnchantment:
-					break;
+                case GameEventType.AddCharacterEnchantment:
+                    break;
 
-				case GameEventType.RemoveMultipleCharacterEnchantments:
-					break;
+                case GameEventType.RemoveCharacterEnchantment:
+                    break;
 
-				case GameEventType.RemoveAllCharacterEnchantmentsSilent:
-					break;
+                case GameEventType.RemoveMultipleCharacterEnchantments:
+                    break;
 
-				case GameEventType.RemoveCharacterEnchantmentSilent:
-					break;
+                case GameEventType.RemoveAllCharacterEnchantmentsSilent:
+                    break;
 
-				case GameEventType.RemoveMultipleCharacterEnchantmentsSilent:
-					break;
+                case GameEventType.RemoveCharacterEnchantmentSilent:
+                    break;
 
-				case GameEventType.MildPortalStorm:
-					break;
+                case GameEventType.RemoveMultipleCharacterEnchantmentsSilent:
+                    break;
 
-				case GameEventType.HeavyPortalStorm:
-					break;
+                case GameEventType.MildPortalStorm:
+                    break;
 
-				case GameEventType.PortalStormed:
-					break;
+                case GameEventType.HeavyPortalStorm:
+                    break;
 
-				case GameEventType.EndPortalStorm:
-					break;
+                case GameEventType.PortalStormed:
+                    break;
 
-				case GameEventType.StatusMessage:
-					break;
+                case GameEventType.EndPortalStorm:
+                    break;
 
-				default:
-					throw new ArgumentOutOfRangeException();
-			}
-		}
+                case GameEventType.StatusMessage:
+                    break;
 
-		private void DispatchGameEventLoginCharacter(Message message)
-		{
-			// NOT COMPLETE
-			Host.Actions.AddChatText(string.Format("[DFilter v{0}] Initialized", Assembly.GetExecutingAssembly().GetName().Version),
-									1, 1);
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
 
-			GameEventLoginCharacter?.Invoke(this, EventArgs.Empty);
-		}
+        private void DispatchGameEventMessageBox(Message message)
+        {
+            // NOT COMPLETE
+            GameEventMessageBox?.Invoke(this, EventArgs.Empty);
+        }
 
-		/// <summary>
-		/// Messages from client to server.
-		/// </summary>
-		/// <param name="message"></param>
-		private void OnClientDispatch(object sender, NetworkMessageEventArgs e)
-		{
-			ClientMessageType clientMessageType = (ClientMessageType)e.Message.Type;
+        private void DispatchGameEventLoginCharacter(Message message)
+        {
+            // NOT COMPLETE
+            Host.Actions.AddChatText(string.Format("[DFilter v{0}] Initialized", Assembly.GetExecutingAssembly().GetName().Version),
+                                    1, 1);
 
-			switch (clientMessageType)
-			{
-				case ClientMessageType.GameAction:
-					DispatchGameAction(e.Message);
-					break;
+            GameEventLoginCharacter?.Invoke(this, EventArgs.Empty);
+        }
 
-				default:
-					throw new ArgumentOutOfRangeException();
-			}
-		}
+        /// <summary>
+        /// Messages from client to server.
+        /// </summary>
+        /// <param name="message"></param>
+        private void OnClientDispatch(object sender, NetworkMessageEventArgs e)
+        {
+            ClientMessageType clientMessageType = (ClientMessageType)e.Message.Type;
 
-		/// <summary>
-		/// Messages from server to client.
-		/// </summary>
-		/// <param name="message"></param>
-		private void OnServerDispatch(object sender, NetworkMessageEventArgs e)
-		{
-			ServerMessageType serverMessageType = (ServerMessageType)e.Message.Type;
+            switch (clientMessageType)
+            {
+                case ClientMessageType.GameAction:
+                    DispatchGameAction(e.Message);
+                    break;
 
-			switch (serverMessageType)
-			{
-				case ServerMessageType.DestroyObject:
-					break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
 
-				case ServerMessageType.LocalChat:
-					break;
+        /// <summary>
+        /// Messages from server to client.
+        /// </summary>
+        /// <param name="message"></param>
+        private void OnServerDispatch(object sender, NetworkMessageEventArgs e)
+        {
+            ServerMessageType serverMessageType = (ServerMessageType)e.Message.Type;
 
-				case ServerMessageType.Attack:
-					break;
+            switch (serverMessageType)
+            {
+                case ServerMessageType.DestroyObject:
+                    break;
 
-				case ServerMessageType.AdjustStackSize:
-					break;
+                case ServerMessageType.LocalChat:
+                    break;
 
-				case ServerMessageType.PlayerKilled:
-					break;
+                case ServerMessageType.Attack:
+                    break;
 
-				case ServerMessageType.BroadcastText:
-					break;
+                case ServerMessageType.AdjustStackSize:
+                    break;
 
-				case ServerMessageType.IndirectText:
-					break;
+                case ServerMessageType.PlayerKilled:
+                    break;
 
-				case ServerMessageType.EmoteText:
-					break;
+                case ServerMessageType.BroadcastText:
+                    break;
 
-				case ServerMessageType.SetCoverage:
-					break;
+                case ServerMessageType.IndirectText:
+                    break;
 
-				case ServerMessageType.SetCharacterFlag:
-					break;
+                case ServerMessageType.EmoteText:
+                    break;
 
-				case ServerMessageType.SetWielderContainer:
-					break;
+                case ServerMessageType.SetCoverage:
+                    break;
 
-				case ServerMessageType.SetObjectResourceObsolete:
-					break;
+                case ServerMessageType.SetCharacterFlag:
+                    break;
 
-				case ServerMessageType.UpdateStatistic:
-					break;
+                case ServerMessageType.SetWielderContainer:
+                    break;
 
-				case ServerMessageType.UpdateLastAttacker:
-					break;
+                case ServerMessageType.SetObjectResourceObsolete:
+                    break;
 
-				case ServerMessageType.UpdateLastCorpseLocation:
-					break;
+                case ServerMessageType.UpdateStatistic:
+                    break;
 
-				case ServerMessageType.SkillExperience:
-					break;
+                case ServerMessageType.UpdateLastAttacker:
+                    break;
 
-				case ServerMessageType.TrainSkill:
-					break;
+                case ServerMessageType.UpdateLastCorpseLocation:
+                    break;
 
-				case ServerMessageType.UpdateAttribute:
-					break;
+                case ServerMessageType.SkillExperience:
+                    break;
 
-				case ServerMessageType.UpdateSecondaryAttribute:
-					break;
+                case ServerMessageType.TrainSkill:
+                    break;
 
-				case ServerMessageType.VitalStatisticUpdate:
-					break;
+                case ServerMessageType.UpdateAttribute:
+                    break;
 
-				case ServerMessageType.CreatureMessage:
-					break;
+                case ServerMessageType.UpdateSecondaryAttribute:
+                    break;
 
-				case ServerMessageType.CreatureMessageRanged:
-					break;
+                case ServerMessageType.VitalStatisticUpdate:
+                    break;
 
-				case ServerMessageType.SetCharacterDWord:
-					break;
+                case ServerMessageType.CreatureMessage:
+                    break;
 
-				case ServerMessageType.SetObjectDWord:
-					break;
+                case ServerMessageType.CreatureMessageRanged:
+                    break;
 
-				case ServerMessageType.SetCharacterQWord:
-					break;
+                case ServerMessageType.SetCharacterDWord:
+                    break;
 
-				case ServerMessageType.SetCharacterBoolean:
-					break;
+                case ServerMessageType.SetObjectDWord:
+                    break;
 
-				case ServerMessageType.SetObjectBoolean:
-					break;
+                case ServerMessageType.SetCharacterQWord:
+                    break;
 
-				case ServerMessageType.SetObjectString:
-					break;
+                case ServerMessageType.SetCharacterBoolean:
+                    break;
 
-				case ServerMessageType.SetObjectResource:
-					break;
+                case ServerMessageType.SetObjectBoolean:
+                    break;
 
-				case ServerMessageType.SetCharacterLink:
-					break;
+                case ServerMessageType.SetObjectString:
+                    break;
 
-				case ServerMessageType.SetObjectLink:
-					break;
+                case ServerMessageType.SetObjectResource:
+                    break;
 
-				case ServerMessageType.SetCharacterPosition:
-					break;
+                case ServerMessageType.SetCharacterLink:
+                    break;
 
-				case ServerMessageType.SetCharacterSkillLevel:
-					break;
+                case ServerMessageType.SetObjectLink:
+                    break;
 
-				case ServerMessageType.SetCharacterSkillState:
-					break;
+                case ServerMessageType.SetCharacterPosition:
+                    break;
 
-				case ServerMessageType.SetCharacterAttribute:
-					break;
+                case ServerMessageType.SetCharacterSkillLevel:
+                    break;
 
-				case ServerMessageType.SetCharacterVital:
-					break;
+                case ServerMessageType.SetCharacterSkillState:
+                    break;
 
-				case ServerMessageType.SetCharacterCurrentVital:
-					break;
+                case ServerMessageType.SetCharacterAttribute:
+                    break;
 
-				case ServerMessageType.LifestoneMaterialize:
-					break;
+                case ServerMessageType.SetCharacterVital:
+                    break;
 
-				case ServerMessageType.ChangeModel:
-					break;
+                case ServerMessageType.SetCharacterCurrentVital:
+                    break;
 
-				case ServerMessageType.ServerText:
-					break;
+                case ServerMessageType.LifestoneMaterialize:
+                    break;
 
-				case ServerMessageType.CharacterCreationInitialization:
-					break;
+                case ServerMessageType.ChangeModel:
+                    break;
 
-				case ServerMessageType.End3DMode:
-					break;
+                case ServerMessageType.ServerText:
+                    break;
 
-				case ServerMessageType.CharacterDeletion:
-					break;
+                case ServerMessageType.CharacterCreationInitialization:
+                    break;
 
-				case ServerMessageType.RequestLogin:
-					break;
+                case ServerMessageType.End3DMode:
+                    break;
 
-				case ServerMessageType.CharacterList:
-					break;
+                case ServerMessageType.CharacterDeletion:
+                    break;
 
-				case ServerMessageType.CharacterListFailure:
-					break;
+                case ServerMessageType.RequestLogin:
+                    break;
 
-				case ServerMessageType.MessageOfTheDay:
-					break;
+                case ServerMessageType.CharacterList:
+                    break;
 
-				case ServerMessageType.CreateObject:
-					break;
+                case ServerMessageType.CharacterListFailure:
+                    break;
 
-				case ServerMessageType.LoginCharacter:
-					break;
+                case ServerMessageType.MessageOfTheDay:
+                    break;
 
-				case ServerMessageType.RemoveItem:
-					break;
+                case ServerMessageType.CreateObject:
+                    break;
 
-				case ServerMessageType.SetPositionAndMotion:
-					break;
+                case ServerMessageType.LoginCharacter:
+                    break;
 
-				case ServerMessageType.WieldObject:
-					break;
+                case ServerMessageType.RemoveItem:
+                    break;
 
-				case ServerMessageType.MoveObjectIntoInventory:
-					break;
+                case ServerMessageType.SetPositionAndMotion:
+                    break;
 
-				case ServerMessageType.ToggleObjectVisibility:
-					break;
+                case ServerMessageType.WieldObject:
+                    break;
 
-				case ServerMessageType.Animation:
-					break;
+                case ServerMessageType.MoveObjectIntoInventory:
+                    break;
 
-				case ServerMessageType.Jumping:
-					break;
+                case ServerMessageType.ToggleObjectVisibility:
+                    break;
 
-				case ServerMessageType.ApplySoundEffect:
-					break;
+                case ServerMessageType.Animation:
+                    break;
 
-				case ServerMessageType.EnterPortalMode:
-					break;
+                case ServerMessageType.Jumping:
+                    break;
 
-				case ServerMessageType.ApplyVisualSoundEffect:
-					break;
+                case ServerMessageType.ApplySoundEffect:
+                    break;
 
-				case ServerMessageType.GameEvent:
-					DispatchGameEvent(e.Message);
-					break;
+                case ServerMessageType.EnterPortalMode:
+                    break;
 
-				case ServerMessageType.Start3DModeObsolete:
-					break;
+                case ServerMessageType.ApplyVisualSoundEffect:
+                    break;
 
-				case ServerMessageType.EnterGame:
-					break;
+                case ServerMessageType.GameEvent:
+                    DispatchGameEvent(e.Message);
+                    break;
 
-				case ServerMessageType.UpdateObject:
-					break;
+                case ServerMessageType.Start3DModeObsolete:
+                    break;
 
-				case ServerMessageType.TurbineChat:
-					break;
+                case ServerMessageType.EnterGame:
+                    break;
 
-				case ServerMessageType.Start3DMode:
-					break;
+                case ServerMessageType.UpdateObject:
+                    break;
 
-				case ServerMessageType.ServerMessage:
-					break;
+                case ServerMessageType.TurbineChat:
+                    break;
 
-				case ServerMessageType.ServerName:
-					break;
+                case ServerMessageType.Start3DMode:
+                    break;
 
-				case ServerMessageType.UpdateResource:
-					break;
+                case ServerMessageType.ServerMessage:
+                    break;
 
-				case ServerMessageType.DatFilePatchList:
-					break;
+                case ServerMessageType.ServerName:
+                    break;
 
-				default:
-					throw new ArgumentOutOfRangeException();
-			}
-		}
+                case ServerMessageType.UpdateResource:
+                    break;
 
-		#endregion Private Methods
-	}
+                case ServerMessageType.DatFilePatchList:
+                    break;
+
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+
+        #endregion Private Methods
+    }
 }

@@ -107,9 +107,6 @@ namespace DFilter
 					break;
 
 				case GameEventType.LoginCharacter:
-					Host.Actions.AddChatText(string.Format("[DFilter v{0}] initialized", Assembly.GetExecutingAssembly().GetName().Version.ToString()),
-											1, 1);
-
 					DispatchGameEventLoginCharacter(message);
 					break;
 
@@ -385,6 +382,9 @@ namespace DFilter
 		private void DispatchGameEventLoginCharacter(Message message)
 		{
 			// NOT COMPLETE
+			Host.Actions.AddChatText(string.Format("[DFilter v{0}] Initialized", Assembly.GetExecutingAssembly().GetName().Version),
+									1, 1);
+
 			GameEventLoginCharacter?.Invoke(this, EventArgs.Empty);
 		}
 

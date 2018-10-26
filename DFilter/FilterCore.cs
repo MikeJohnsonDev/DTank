@@ -269,9 +269,6 @@ namespace DFilter
 
 				case GameActionType.RemoveSpellFromSpellBar:
 					break;
-
-				default:
-					throw new ArgumentOutOfRangeException();
 			}
 		}
 
@@ -552,9 +549,6 @@ namespace DFilter
 
 				case GameEventType.StatusMessage:
 					break;
-
-				default:
-					throw new ArgumentOutOfRangeException();
 			}
 		}
 
@@ -909,6 +903,12 @@ namespace DFilter
 			GameEvent_PortalStormedObsolete?.Invoke(this, EventArgs.Empty);
 		}
 
+		private void DispatchGameEvent_QuitFellowship(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_QuitFellowship?.Invoke(this, EventArgs.Empty);
+		}
+
 		private void DispatchGameEvent_ReadPage(Message message)
 		{
 			// NOT COMPLETE
@@ -1108,9 +1108,6 @@ namespace DFilter
 				case ClientMessageType.GameAction:
 					DispatchGameAction(e.Message);
 					break;
-
-				default:
-					throw new ArgumentOutOfRangeException();
 			}
 		}
 
@@ -1331,9 +1328,6 @@ namespace DFilter
 
 				case ServerMessageType.DatFilePatchList:
 					break;
-
-				default:
-					throw new ArgumentOutOfRangeException();
 			}
 		}
 

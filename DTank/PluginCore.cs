@@ -2,18 +2,18 @@
 
 namespace DTank
 {
-	public class PluginCore : PluginBase
-	{
-		#region Protected Methods
+    public class PluginCore : PluginBase
+    {
+        #region Protected Methods
 
-		protected override void Shutdown()
-		{
-		}
+        protected override void Shutdown()
+        {
+        }
 
-		protected override void Startup()
-		{
-		}
+        protected override void Startup()
+        {
+        }
 
-		#endregion Protected Methods
-	}
+        #endregion Protected Methods
+    }
 }

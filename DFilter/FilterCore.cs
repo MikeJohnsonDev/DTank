@@ -9,7 +9,185 @@ namespace DFilter
 	{
 		#region Public Fields + Events
 
-		public event EventHandler GameEventLoginCharacter;
+		public event EventHandler GameEvent_AcceptTrade;
+
+		public event EventHandler GameEvent_AddCharacterEnchantment;
+
+		public event EventHandler GameEvent_AddEnchantment;
+
+		public event EventHandler GameEvent_AddFellowshipMember;
+
+		public event EventHandler GameEvent_AddSpellToSpellBook;
+
+		public event EventHandler GameEvent_AddSpellToSpellBookCastSpell;
+
+		public event EventHandler GameEvent_AddTradeItem;
+
+		public event EventHandler GameEvent_AgeCommandResult;
+
+		public event EventHandler GameEvent_AllegianceInformation;
+
+		public event EventHandler GameEvent_AllegianceMemberLoginOut;
+
+		public event EventHandler GameEvent_ApproachVendor;
+
+		public event EventHandler GameEvent_AttackCompleted;
+
+		public event EventHandler GameEvent_CloseAssessPanel;
+
+		public event EventHandler GameEvent_CloseContainer;
+
+		public event EventHandler GameEvent_ConfirmationPanel;
+
+		public event EventHandler GameEvent_ConfirmationPanelClosed;
+
+		public event EventHandler GameEvent_CreateFellowship;
+
+		public event EventHandler GameEvent_CreateFellowshipObsolete;
+
+		public event EventHandler GameEvent_DeleteSpellFromSpellBook;
+
+		public event EventHandler GameEvent_DeleteSpellFromSpellBookObsolete;
+
+		public event EventHandler GameEvent_DirectChat;
+
+		public event EventHandler GameEvent_DisbandFellowship;
+
+		public event EventHandler GameEvent_DisbandFellowshipObsolete;
+
+		public event EventHandler GameEvent_DismissMember;
+
+		public event EventHandler GameEvent_DisplayDwellingPurchaseMaintenancePanel;
+
+		public event EventHandler GameEvent_DisplayParameterizedStatusMessage;
+
+		public event EventHandler GameEvent_DisplayStatusMessage;
+
+		public event EventHandler GameEvent_DropFromInventory;
+
+		public event EventHandler GameEvent_EndPortalStorm;
+
+		public event EventHandler GameEvent_EndPortalStormObsolete;
+
+		public event EventHandler GameEvent_EndTrade;
+
+		public event EventHandler GameEvent_EnterTrade;
+
+		public event EventHandler GameEvent_FailureToAddATradeItem;
+
+		public event EventHandler GameEvent_FailureToCompleteATrade;
+
+		public event EventHandler GameEvent_FailureToGiveItem;
+
+		public event EventHandler GameEvent_FellowshipMemberDismissed;
+
+		public event EventHandler GameEvent_FellowshipMemberQuit;
+
+		public event EventHandler GameEvent_FriendsListUpdate;
+
+		public event EventHandler GameEvent_GroupChat;
+
+		public event EventHandler GameEvent_GroupChatObsolete;
+
+		public event EventHandler GameEvent_HeavyPortalStorm;
+
+		public event EventHandler GameEvent_HeavyPortalStormObsolete;
+
+		public event EventHandler GameEvent_HouseGuestList;
+
+		public event EventHandler GameEvent_HouseInformationForNonOwners;
+
+		public event EventHandler GameEvent_HouseInformationForOwners;
+
+		public event EventHandler GameEvent_HousesAvailable;
+
+		public event EventHandler GameEvent_IdentifyObject;
+
+		public event EventHandler GameEvent_InflictMeleeDamage;
+
+		public event EventHandler GameEvent_InsertInventoryItem;
+
+		public event EventHandler GameEvent_KillDeathMessage;
+
+		public event EventHandler GameEvent_LoginCharacter;
+
+		public event EventHandler GameEvent_MessageBox;
+
+		public event EventHandler GameEvent_MildPortalStorm;
+
+		public event EventHandler GameEvent_MildPortalStormObsolete;
+
+		public event EventHandler GameEvent_OtherMeleeEvade;
+
+		public event EventHandler GameEvent_PingReply;
+
+		public event EventHandler GameEvent_PortalStormed;
+
+		public event EventHandler GameEvent_PortalStormedObsolete;
+
+		public event EventHandler GameEvent_QuitFellowship;
+
+		public event EventHandler GameEvent_ReadPage;
+
+		public event EventHandler GameEvent_ReadTableOfContents;
+
+		public event EventHandler GameEvent_ReadyPreviousActionComplete;
+
+		public event EventHandler GameEvent_ReceiveMeleeDamage;
+
+		public event EventHandler GameEvent_RecruitMember;
+
+		public event EventHandler GameEvent_RemoveAllCharacterEnchantmentsSilent;
+
+		public event EventHandler GameEvent_RemoveCharacterEnchantment;
+
+		public event EventHandler GameEvent_RemoveCharacterEnchantmentSilent;
+
+		public event EventHandler GameEvent_RemoveEnchantment;
+
+		public event EventHandler GameEvent_RemoveEnchantmentSilent;
+
+		public event EventHandler GameEvent_RemoveMultipleCharacterEnchantments;
+
+		public event EventHandler GameEvent_RemoveMultipleCharacterEnchantmentsSilent;
+
+		public event EventHandler GameEvent_RemoveMultipleEnchantmentsObsolete;
+
+		public event EventHandler GameEvent_RemoveMultipleEnchantmentsObsolete2;
+
+		public event EventHandler GameEvent_ResetTrade;
+
+		public event EventHandler GameEvent_SelfMeleeEvade;
+
+		public event EventHandler GameEvent_SetPackContents;
+
+		public event EventHandler GameEvent_SetTitle;
+
+		public event EventHandler GameEvent_SetTurbineChatChannels;
+
+		public event EventHandler GameEvent_SquelchedUsersList;
+
+		public event EventHandler GameEvent_StartMeleeAttack;
+
+		public event EventHandler GameEvent_StatusMessage;
+
+		public event EventHandler GameEvent_Tell;
+
+		public event EventHandler GameEvent_TitleList;
+
+		public event EventHandler GameEvent_TransactionMessage;
+
+		public event EventHandler GameEvent_UnAcceptTrade;
+
+		public event EventHandler GameEvent_UpdateAllegianceInfo;
+
+		public event EventHandler GameEvent_UpdateHealth;
+
+		public event EventHandler GameEvent_UpdateItemManaBar;
+
+		public event EventHandler GameEvent_WearItem;
+
+		public event EventHandler GameEvent_YourDeath;
 
 		#endregion Public Fields + Events
 
@@ -104,10 +282,11 @@ namespace DFilter
 			switch (gameEventType)
 			{
 				case GameEventType.MessageBox:
+					DispatchGameEvent_MessageBox(message);
 					break;
 
 				case GameEventType.LoginCharacter:
-					DispatchGameEventLoginCharacter(message);
+					DispatchGameEvent_LoginCharacter(message);
 					break;
 
 				case GameEventType.TransactionMessage:
@@ -379,13 +558,541 @@ namespace DFilter
 			}
 		}
 
-		private void DispatchGameEventLoginCharacter(Message message)
+		private void DispatchGameEvent_AcceptTrade(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_AcceptTrade?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_AddCharacterEnchantment(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_AddCharacterEnchantment?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_AddEnchantment(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_AddEnchantment?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_AddFellowshipMember(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_AddFellowshipMember?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_AddSpellToSpellBook(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_AddSpellToSpellBook?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_AddSpellToSpellBookCastSpell(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_AddSpellToSpellBookCastSpell?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_AddTradeItem(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_AddTradeItem?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_AgeCommandResult(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_AgeCommandResult?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_AllegianceInformation(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_AllegianceInformation?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_AllegianceMemberLoginOut(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_AllegianceMemberLoginOut?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_ApproachVendor(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_ApproachVendor?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_AttackCompleted(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_AttackCompleted?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_CloseAssessPanel(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_CloseAssessPanel?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_CloseContainer(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_CloseContainer?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_ConfirmationPanel(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_ConfirmationPanel?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_ConfirmationPanelClosed(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_ConfirmationPanelClosed?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_CreateFellowship(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_CreateFellowship?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_CreateFellowshipObsolete(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_CreateFellowshipObsolete?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_DeleteSpellFromSpellBook(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_DeleteSpellFromSpellBook?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_DeleteSpellFromSpellBookObsolete(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_DeleteSpellFromSpellBookObsolete?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_DirectChat(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_DirectChat?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_DisbandFellowship(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_DisbandFellowship?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_DisbandFellowshipObsolete(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_DisbandFellowshipObsolete?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_DismissMember(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_DismissMember?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_DisplayDwellingPurchaseMaintenancePanel(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_DisplayDwellingPurchaseMaintenancePanel?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_DisplayParameterizedStatusMessage(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_DisplayParameterizedStatusMessage?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_DisplayStatusMessage(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_DisplayStatusMessage?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_DropFromInventory(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_DropFromInventory?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_EndPortalStorm(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_EndPortalStorm?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_EndPortalStormObsolete(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_EndPortalStormObsolete?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_EndTrade(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_EndTrade?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_EnterTrade(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_EnterTrade?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_FailureToAddATradeItem(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_FailureToAddATradeItem?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_FailureToCompleteATrade(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_FailureToCompleteATrade?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_FailureToGiveItem(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_FailureToGiveItem?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_FellowshipMemberDismissed(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_FellowshipMemberDismissed?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_FellowshipMemberQuit(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_FellowshipMemberQuit?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_FriendsListUpdate(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_FriendsListUpdate?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_GroupChat(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_GroupChat?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_GroupChatObsolete(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_GroupChatObsolete?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_HeavyPortalStorm(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_HeavyPortalStorm?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_HeavyPortalStormObsolete(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_HeavyPortalStormObsolete?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_HouseGuestList(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_HouseGuestList?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_HouseInformationForNonOwners(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_HouseInformationForNonOwners?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_HouseInformationForOwners(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_HouseInformationForOwners?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_HousesAvailable(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_HousesAvailable?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_IdentifyObject(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_IdentifyObject?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_InflictMeleeDamage(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_InflictMeleeDamage?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_InsertInventoryItem(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_InsertInventoryItem?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_KillDeathMessage(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_KillDeathMessage?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_LoginCharacter(Message message)
 		{
 			// NOT COMPLETE
 			Host.Actions.AddChatText(string.Format("[DFilter v{0}] Initialized", Assembly.GetExecutingAssembly().GetName().Version),
 									1, 1);
 
-			GameEventLoginCharacter?.Invoke(this, EventArgs.Empty);
+			GameEvent_LoginCharacter?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_MessageBox(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_MessageBox?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_MildPortalStorm(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_MildPortalStorm?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_MildPortalStormObsolete(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_MildPortalStormObsolete?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_OtherMeleeEvade(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_OtherMeleeEvade?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_PingReply(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_PingReply?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_PortalStormed(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_PortalStormed?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_PortalStormedObsolete(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_PortalStormedObsolete?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_ReadPage(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_ReadPage?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_ReadTableOfContents(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_ReadTableOfContents?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_ReadyPreviousActionComplete(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_ReadyPreviousActionComplete?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_ReceiveMeleeDamage(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_ReceiveMeleeDamage?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_RecruitMember(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_RecruitMember?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_RemoveAllCharacterEnchantmentsSilent(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_RemoveAllCharacterEnchantmentsSilent?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_RemoveCharacterEnchantment(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_RemoveCharacterEnchantment?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_RemoveCharacterEnchantmentSilent(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_RemoveCharacterEnchantmentSilent?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_RemoveEnchantment(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_RemoveEnchantment?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_RemoveEnchantmentSilent(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_RemoveEnchantmentSilent?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_RemoveMultipleCharacterEnchantments(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_RemoveMultipleCharacterEnchantments?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_RemoveMultipleCharacterEnchantmentsSilent(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_RemoveMultipleCharacterEnchantmentsSilent?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_RemoveMultipleEnchantmentsObsolete(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_RemoveMultipleEnchantmentsObsolete?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_RemoveMultipleEnchantmentsObsolete2(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_RemoveMultipleEnchantmentsObsolete2?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_ResetTrade(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_ResetTrade?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_SelfMeleeEvade(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_SelfMeleeEvade?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_SetPackContents(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_SetPackContents?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_SetTitle(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_SetTitle?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_SetTurbineChatChannels(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_SetTurbineChatChannels?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_SquelchedUsersList(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_SquelchedUsersList?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_StartMeleeAttack(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_StartMeleeAttack?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_StatusMessage(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_StatusMessage?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_Tell(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_Tell?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_TitleList(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_TitleList?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_TransactionMessage(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_TransactionMessage?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_UnAcceptTrade(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_UnAcceptTrade?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_UpdateAllegianceInfo(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_UpdateAllegianceInfo?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_UpdateHealth(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_UpdateHealth?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_UpdateItemManaBar(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_UpdateItemManaBar?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_WearItem(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_WearItem?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_YourDeath(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_YourDeath?.Invoke(this, EventArgs.Empty);
 		}
 
 		/// <summary>

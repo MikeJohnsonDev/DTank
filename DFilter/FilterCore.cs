@@ -4,641 +4,1339 @@ using System.Reflection;
 
 namespace DFilter
 {
-    [FriendlyName("DFilter")]
-    public sealed class FilterCore : FilterBase
-    {
-        #region Public Fields + Events
+	[FriendlyName("DFilter")]
+	public sealed class FilterCore : FilterBase
+	{
+		#region Public Fields + Events
 
-        public event EventHandler GameEventMessageBox;
+		public event EventHandler GameEvent_AcceptTrade;
 
-        public event EventHandler GameEventLoginCharacter;
+		public event EventHandler GameEvent_AddCharacterEnchantment;
 
-        #endregion Public Fields + Events
+		public event EventHandler GameEvent_AddEnchantment;
 
-        #region Protected Methods
+		public event EventHandler GameEvent_AddFellowshipMember;
 
-        protected override void Shutdown()
-        {
-        }
+		public event EventHandler GameEvent_AddSpellToSpellBook;
 
-        protected override void Startup()
-        {
-            ClientDispatch += OnClientDispatch;
-            ServerDispatch += OnServerDispatch;
-        }
+		public event EventHandler GameEvent_AddSpellToSpellBookCastSpell;
 
-        #endregion Protected Methods
+		public event EventHandler GameEvent_AddTradeItem;
 
-        #region Private Methods
+		public event EventHandler GameEvent_AgeCommandResult;
 
-        private void DispatchGameAction(Message message)
-        {
-            GameActionType gameActionType = (GameActionType)message["action"];
+		public event EventHandler GameEvent_AllegianceInformation;
 
-            switch (gameActionType)
-            {
-                case GameActionType.SetSingleCharacterOption:
-                    break;
+		public event EventHandler GameEvent_AllegianceMemberLoginOut;
 
-                case GameActionType.SetAfkMessage:
-                    break;
+		public event EventHandler GameEvent_ApproachVendor;
 
-                case GameActionType.StoreItem:
-                    break;
+		public event EventHandler GameEvent_AttackCompleted;
 
-                case GameActionType.EquipItem:
-                    break;
+		public event EventHandler GameEvent_CloseAssessPanel;
 
-                case GameActionType.DropItem:
-                    break;
+		public event EventHandler GameEvent_CloseContainer;
 
-                case GameActionType.UseItem:
-                    break;
+		public event EventHandler GameEvent_ConfirmationPanel;
 
-                case GameActionType.RaiseVital:
-                    break;
+		public event EventHandler GameEvent_ConfirmationPanelClosed;
 
-                case GameActionType.RaiseAttribute:
-                    break;
+		public event EventHandler GameEvent_CreateFellowship;
 
-                case GameActionType.RaiseSkill:
-                    break;
+		public event EventHandler GameEvent_CreateFellowshipObsolete;
 
-                case GameActionType.TrainSkill:
-                    break;
+		public event EventHandler GameEvent_DeleteSpellFromSpellBook;
 
-                case GameActionType.CastSpell:
-                    break;
+		public event EventHandler GameEvent_DeleteSpellFromSpellBookObsolete;
 
-                case GameActionType.CastSpellOnObject:
-                    break;
+		public event EventHandler GameEvent_DirectChat;
 
-                case GameActionType.Materialize:
-                    break;
+		public event EventHandler GameEvent_DisbandFellowship;
 
-                case GameActionType.GiveItem:
-                    break;
+		public event EventHandler GameEvent_DisbandFellowshipObsolete;
 
-                case GameActionType.MakeShortcut:
-                    break;
+		public event EventHandler GameEvent_DismissMember;
 
-                case GameActionType.RemoveShortcut:
-                    break;
+		public event EventHandler GameEvent_DisplayDwellingPurchaseMaintenancePanel;
 
-                case GameActionType.SetCharacterOptions:
-                    break;
+		public event EventHandler GameEvent_DisplayParameterizedStatusMessage;
 
-                case GameActionType.AddSpellToSpellBar:
-                    break;
+		public event EventHandler GameEvent_DisplayStatusMessage;
 
-                case GameActionType.RemoveSpellFromSpellBar:
-                    break;
+		public event EventHandler GameEvent_DropFromInventory;
 
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-        }
+		public event EventHandler GameEvent_EndPortalStorm;
 
-        private void DispatchGameEvent(Message message)
-        {
-            GameEventType gameEventType = (GameEventType)message["event"];
+		public event EventHandler GameEvent_EndPortalStormObsolete;
 
-            switch (gameEventType)
-            {
-                case GameEventType.MessageBox:
-                    DispatchGameEventMessageBox(message);
-                    break;
+		public event EventHandler GameEvent_EndTrade;
 
-                case GameEventType.LoginCharacter:
-                    DispatchGameEventLoginCharacter(message);
-                    break;
+		public event EventHandler GameEvent_EnterTrade;
 
-                case GameEventType.TransactionMessage:
-                    break;
+		public event EventHandler GameEvent_FailureToAddATradeItem;
 
-                case GameEventType.AllegianceInformation:
-                    break;
+		public event EventHandler GameEvent_FailureToCompleteATrade;
 
-                case GameEventType.FriendsListUpdate:
-                    break;
+		public event EventHandler GameEvent_FailureToGiveItem;
 
-                case GameEventType.InsertInventoryItem:
-                    break;
+		public event EventHandler GameEvent_FellowshipMemberDismissed;
 
-                case GameEventType.WearItem:
-                    break;
+		public event EventHandler GameEvent_FellowshipMemberQuit;
 
-                case GameEventType.TitleList:
-                    break;
+		public event EventHandler GameEvent_FriendsListUpdate;
 
-                case GameEventType.SetTitle:
-                    break;
+		public event EventHandler GameEvent_GroupChat;
 
-                case GameEventType.DirectChat:
-                    break;
+		public event EventHandler GameEvent_GroupChatObsolete;
 
-                case GameEventType.AddSpellToSpellBookCastSpell:
-                    break;
+		public event EventHandler GameEvent_HeavyPortalStorm;
 
-                case GameEventType.DeleteSpellFromSpellBookObsolete:
-                    break;
+		public event EventHandler GameEvent_HeavyPortalStormObsolete;
 
-                case GameEventType.AddEnchantment:
-                    break;
+		public event EventHandler GameEvent_HouseGuestList;
 
-                case GameEventType.RemoveEnchantment:
-                    break;
+		public event EventHandler GameEvent_HouseInformationForNonOwners;
 
-                case GameEventType.CloseContainer:
-                    break;
+		public event EventHandler GameEvent_HouseInformationForOwners;
 
-                case GameEventType.ApproachVendor:
-                    break;
+		public event EventHandler GameEvent_HousesAvailable;
 
-                case GameEventType.EndPortalStormObsolete:
-                    break;
+		public event EventHandler GameEvent_IdentifyObject;
 
-                case GameEventType.MildPortalStormObsolete:
-                    break;
+		public event EventHandler GameEvent_InflictMeleeDamage;
 
-                case GameEventType.HeavyPortalStormObsolete:
-                    break;
+		public event EventHandler GameEvent_InsertInventoryItem;
 
-                case GameEventType.PortalStormedObsolete:
-                    break;
+		public event EventHandler GameEvent_KillDeathMessage;
 
-                case GameEventType.FailureToGiveItem:
-                    break;
+		public event EventHandler GameEvent_LoginCharacter;
 
-                case GameEventType.FellowshipMemberQuit:
-                    break;
+		public event EventHandler GameEvent_MessageBox;
 
-                case GameEventType.FellowshipMemberDismissed:
-                    break;
+		public event EventHandler GameEvent_MildPortalStorm;
 
-                case GameEventType.QuitFellowship:
-                    break;
+		public event EventHandler GameEvent_MildPortalStormObsolete;
 
-                case GameEventType.CreateFellowshipObsolete:
-                    break;
+		public event EventHandler GameEvent_OtherMeleeEvade;
 
-                case GameEventType.RecruitMember:
-                    break;
+		public event EventHandler GameEvent_PingReply;
 
-                case GameEventType.DismissMember:
-                    break;
+		public event EventHandler GameEvent_PortalStormed;
 
-                case GameEventType.DisbandFellowshipObsolete:
-                    break;
+		public event EventHandler GameEvent_PortalStormedObsolete;
 
-                case GameEventType.ReadTableOfContents:
-                    break;
+		public event EventHandler GameEvent_QuitFellowship;
 
-                case GameEventType.ReadPage:
-                    break;
+		public event EventHandler GameEvent_ReadPage;
 
-                case GameEventType.IdentifyObject:
-                    break;
+		public event EventHandler GameEvent_ReadTableOfContents;
 
-                case GameEventType.GroupChat:
-                    break;
+		public event EventHandler GameEvent_ReadyPreviousActionComplete;
 
-                case GameEventType.GroupChatObsolete:
-                    break;
+		public event EventHandler GameEvent_ReceiveMeleeDamage;
 
-                case GameEventType.SetPackContents:
-                    break;
+		public event EventHandler GameEvent_RecruitMember;
 
-                case GameEventType.DropFromInventory:
-                    break;
+		public event EventHandler GameEvent_RemoveAllCharacterEnchantmentsSilent;
 
-                case GameEventType.RemoveEnchantmentSilent:
-                    break;
+		public event EventHandler GameEvent_RemoveCharacterEnchantment;
 
-                case GameEventType.RemoveMultipleEnchantmentsObsolete:
-                    break;
+		public event EventHandler GameEvent_RemoveCharacterEnchantmentSilent;
 
-                case GameEventType.AttackCompleted:
-                    break;
+		public event EventHandler GameEvent_RemoveEnchantment;
 
-                case GameEventType.DeleteSpellFromSpellBook:
-                    break;
+		public event EventHandler GameEvent_RemoveEnchantmentSilent;
 
-                case GameEventType.YourDeath:
-                    break;
+		public event EventHandler GameEvent_RemoveMultipleCharacterEnchantments;
 
-                case GameEventType.KillDeathMessage:
-                    break;
+		public event EventHandler GameEvent_RemoveMultipleCharacterEnchantmentsSilent;
 
-                case GameEventType.RemoveMultipleEnchantmentsObsolete2:
-                    break;
+		public event EventHandler GameEvent_RemoveMultipleEnchantmentsObsolete;
 
-                case GameEventType.InflictMeleeDamage:
-                    break;
+		public event EventHandler GameEvent_RemoveMultipleEnchantmentsObsolete2;
 
-                case GameEventType.ReceiveMeleeDamage:
-                    break;
+		public event EventHandler GameEvent_ResetTrade;
 
-                case GameEventType.OtherMeleeEvade:
-                    break;
+		public event EventHandler GameEvent_SelfMeleeEvade;
 
-                case GameEventType.SelfMeleeEvade:
-                    break;
+		public event EventHandler GameEvent_SetPackContents;
 
-                case GameEventType.StartMeleeAttack:
-                    break;
+		public event EventHandler GameEvent_SetTitle;
 
-                case GameEventType.UpdateHealth:
-                    break;
+		public event EventHandler GameEvent_SetTurbineChatChannels;
 
-                case GameEventType.AgeCommandResult:
-                    break;
+		public event EventHandler GameEvent_SquelchedUsersList;
 
-                case GameEventType.ReadyPreviousActionComplete:
-                    break;
+		public event EventHandler GameEvent_StartMeleeAttack;
 
-                case GameEventType.UpdateAllegianceInfo:
-                    break;
+		public event EventHandler GameEvent_StatusMessage;
 
-                case GameEventType.CloseAssessPanel:
-                    break;
+		public event EventHandler GameEvent_Tell;
 
-                case GameEventType.PingReply:
-                    break;
+		public event EventHandler GameEvent_TitleList;
 
-                case GameEventType.SquelchedUsersList:
-                    break;
+		public event EventHandler GameEvent_TransactionMessage;
 
-                case GameEventType.EnterTrade:
-                    break;
+		public event EventHandler GameEvent_UnAcceptTrade;
 
-                case GameEventType.EndTrade:
-                    break;
+		public event EventHandler GameEvent_UpdateAllegianceInfo;
 
-                case GameEventType.AddTradeItem:
-                    break;
+		public event EventHandler GameEvent_UpdateHealth;
 
-                case GameEventType.AcceptTrade:
-                    break;
+		public event EventHandler GameEvent_UpdateItemManaBar;
 
-                case GameEventType.UnAcceptTrade:
-                    break;
+		public event EventHandler GameEvent_WearItem;
 
-                case GameEventType.ResetTrade:
-                    break;
+		public event EventHandler GameEvent_YourDeath;
 
-                case GameEventType.FailureToAddATradeItem:
-                    break;
+		#endregion Public Fields + Events
 
-                case GameEventType.FailureToCompleteATrade:
-                    break;
+		#region Protected Methods
 
-                case GameEventType.DisplayDwellingPurchaseMaintenancePanel:
-                    break;
+		protected override void Shutdown()
+		{
+		}
 
-                case GameEventType.HouseInformationForOwners:
-                    break;
+		protected override void Startup()
+		{
+			ClientDispatch += OnClientDispatch;
+			ServerDispatch += OnServerDispatch;
+		}
 
-                case GameEventType.HouseInformationForNonOwners:
-                    break;
+		#endregion Protected Methods
 
-                case GameEventType.HouseGuestList:
-                    break;
+		#region Private Methods
 
-                case GameEventType.UpdateItemManaBar:
-                    break;
+		private void DispatchGameAction(Message message)
+		{
+			GameActionType gameActionType = (GameActionType)message["action"];
 
-                case GameEventType.HousesAvailable:
-                    break;
+			switch (gameActionType)
+			{
+				case GameActionType.SetSingleCharacterOption:
+					break;
 
-                case GameEventType.ConfirmationPanel:
-                    break;
+				case GameActionType.SetAfkMessage:
+					break;
 
-                case GameEventType.ConfirmationPanelClosed:
-                    break;
+				case GameActionType.StoreItem:
+					break;
 
-                case GameEventType.AllegianceMemberLoginOut:
-                    break;
+				case GameActionType.EquipItem:
+					break;
 
-                case GameEventType.DisplayStatusMessage:
-                    break;
+				case GameActionType.DropItem:
+					break;
 
-                case GameEventType.DisplayParameterizedStatusMessage:
-                    break;
+				case GameActionType.UseItem:
+					break;
 
-                case GameEventType.SetTurbineChatChannels:
-                    break;
+				case GameActionType.RaiseVital:
+					break;
 
-                case GameEventType.Tell:
-                    break;
+				case GameActionType.RaiseAttribute:
+					break;
 
-                case GameEventType.CreateFellowship:
-                    break;
+				case GameActionType.RaiseSkill:
+					break;
 
-                case GameEventType.DisbandFellowship:
-                    break;
+				case GameActionType.TrainSkill:
+					break;
 
-                case GameEventType.AddFellowshipMember:
-                    break;
+				case GameActionType.CastSpell:
+					break;
 
-                case GameEventType.AddSpellToSpellBook:
-                    break;
+				case GameActionType.CastSpellOnObject:
+					break;
 
-                case GameEventType.AddCharacterEnchantment:
-                    break;
+				case GameActionType.Materialize:
+					break;
 
-                case GameEventType.RemoveCharacterEnchantment:
-                    break;
+				case GameActionType.GiveItem:
+					break;
 
-                case GameEventType.RemoveMultipleCharacterEnchantments:
-                    break;
+				case GameActionType.MakeShortcut:
+					break;
 
-                case GameEventType.RemoveAllCharacterEnchantmentsSilent:
-                    break;
+				case GameActionType.RemoveShortcut:
+					break;
 
-                case GameEventType.RemoveCharacterEnchantmentSilent:
-                    break;
+				case GameActionType.SetCharacterOptions:
+					break;
 
-                case GameEventType.RemoveMultipleCharacterEnchantmentsSilent:
-                    break;
+				case GameActionType.AddSpellToSpellBar:
+					break;
 
-                case GameEventType.MildPortalStorm:
-                    break;
+				case GameActionType.RemoveSpellFromSpellBar:
+					break;
 
-                case GameEventType.HeavyPortalStorm:
-                    break;
+				default:
+					throw new ArgumentOutOfRangeException();
+			}
+		}
 
-                case GameEventType.PortalStormed:
-                    break;
+		private void DispatchGameEvent(Message message)
+		{
+			GameEventType gameEventType = (GameEventType)message["event"];
 
-                case GameEventType.EndPortalStorm:
-                    break;
+			switch (gameEventType)
+			{
+				case GameEventType.MessageBox:
+					DispatchGameEvent_MessageBox(message);
+					break;
 
-                case GameEventType.StatusMessage:
-                    break;
+				case GameEventType.LoginCharacter:
+					DispatchGameEvent_LoginCharacter(message);
+					break;
 
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-        }
+				case GameEventType.TransactionMessage:
+					break;
 
-        private void DispatchGameEventMessageBox(Message message)
-        {
-            // NOT COMPLETE
-            GameEventMessageBox?.Invoke(this, EventArgs.Empty);
-        }
+				case GameEventType.AllegianceInformation:
+					break;
 
-        private void DispatchGameEventLoginCharacter(Message message)
-        {
-            // NOT COMPLETE
-            Host.Actions.AddChatText(string.Format("[DFilter v{0}] Initialized", Assembly.GetExecutingAssembly().GetName().Version),
-                                    1, 1);
+				case GameEventType.FriendsListUpdate:
+					break;
 
-            GameEventLoginCharacter?.Invoke(this, EventArgs.Empty);
-        }
+				case GameEventType.InsertInventoryItem:
+					break;
 
-        /// <summary>
-        /// Messages from client to server.
-        /// </summary>
-        /// <param name="message"></param>
-        private void OnClientDispatch(object sender, NetworkMessageEventArgs e)
-        {
-            ClientMessageType clientMessageType = (ClientMessageType)e.Message.Type;
+				case GameEventType.WearItem:
+					break;
 
-            switch (clientMessageType)
-            {
-                case ClientMessageType.GameAction:
-                    DispatchGameAction(e.Message);
-                    break;
+				case GameEventType.TitleList:
+					break;
 
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-        }
+				case GameEventType.SetTitle:
+					break;
 
-        /// <summary>
-        /// Messages from server to client.
-        /// </summary>
-        /// <param name="message"></param>
-        private void OnServerDispatch(object sender, NetworkMessageEventArgs e)
-        {
-            ServerMessageType serverMessageType = (ServerMessageType)e.Message.Type;
+				case GameEventType.DirectChat:
+					break;
 
-            switch (serverMessageType)
-            {
-                case ServerMessageType.DestroyObject:
-                    break;
+				case GameEventType.AddSpellToSpellBookCastSpell:
+					break;
 
-                case ServerMessageType.LocalChat:
-                    break;
+				case GameEventType.DeleteSpellFromSpellBookObsolete:
+					break;
 
-                case ServerMessageType.Attack:
-                    break;
+				case GameEventType.AddEnchantment:
+					break;
 
-                case ServerMessageType.AdjustStackSize:
-                    break;
+				case GameEventType.RemoveEnchantment:
+					break;
 
-                case ServerMessageType.PlayerKilled:
-                    break;
+				case GameEventType.CloseContainer:
+					break;
 
-                case ServerMessageType.BroadcastText:
-                    break;
+				case GameEventType.ApproachVendor:
+					break;
 
-                case ServerMessageType.IndirectText:
-                    break;
+				case GameEventType.EndPortalStormObsolete:
+					break;
 
-                case ServerMessageType.EmoteText:
-                    break;
+				case GameEventType.MildPortalStormObsolete:
+					break;
 
-                case ServerMessageType.SetCoverage:
-                    break;
+				case GameEventType.HeavyPortalStormObsolete:
+					break;
 
-                case ServerMessageType.SetCharacterFlag:
-                    break;
+				case GameEventType.PortalStormedObsolete:
+					break;
 
-                case ServerMessageType.SetWielderContainer:
-                    break;
+				case GameEventType.FailureToGiveItem:
+					break;
 
-                case ServerMessageType.SetObjectResourceObsolete:
-                    break;
+				case GameEventType.FellowshipMemberQuit:
+					break;
 
-                case ServerMessageType.UpdateStatistic:
-                    break;
+				case GameEventType.FellowshipMemberDismissed:
+					break;
 
-                case ServerMessageType.UpdateLastAttacker:
-                    break;
+				case GameEventType.QuitFellowship:
+					break;
 
-                case ServerMessageType.UpdateLastCorpseLocation:
-                    break;
+				case GameEventType.CreateFellowshipObsolete:
+					break;
 
-                case ServerMessageType.SkillExperience:
-                    break;
+				case GameEventType.RecruitMember:
+					break;
 
-                case ServerMessageType.TrainSkill:
-                    break;
+				case GameEventType.DismissMember:
+					break;
 
-                case ServerMessageType.UpdateAttribute:
-                    break;
+				case GameEventType.DisbandFellowshipObsolete:
+					break;
 
-                case ServerMessageType.UpdateSecondaryAttribute:
-                    break;
+				case GameEventType.ReadTableOfContents:
+					break;
 
-                case ServerMessageType.VitalStatisticUpdate:
-                    break;
+				case GameEventType.ReadPage:
+					break;
 
-                case ServerMessageType.CreatureMessage:
-                    break;
+				case GameEventType.IdentifyObject:
+					break;
 
-                case ServerMessageType.CreatureMessageRanged:
-                    break;
+				case GameEventType.GroupChat:
+					break;
 
-                case ServerMessageType.SetCharacterDWord:
-                    break;
+				case GameEventType.GroupChatObsolete:
+					break;
 
-                case ServerMessageType.SetObjectDWord:
-                    break;
+				case GameEventType.SetPackContents:
+					break;
 
-                case ServerMessageType.SetCharacterQWord:
-                    break;
+				case GameEventType.DropFromInventory:
+					break;
 
-                case ServerMessageType.SetCharacterBoolean:
-                    break;
+				case GameEventType.RemoveEnchantmentSilent:
+					break;
 
-                case ServerMessageType.SetObjectBoolean:
-                    break;
+				case GameEventType.RemoveMultipleEnchantmentsObsolete:
+					break;
 
-                case ServerMessageType.SetObjectString:
-                    break;
+				case GameEventType.AttackCompleted:
+					break;
 
-                case ServerMessageType.SetObjectResource:
-                    break;
+				case GameEventType.DeleteSpellFromSpellBook:
+					break;
 
-                case ServerMessageType.SetCharacterLink:
-                    break;
+				case GameEventType.YourDeath:
+					break;
 
-                case ServerMessageType.SetObjectLink:
-                    break;
+				case GameEventType.KillDeathMessage:
+					break;
 
-                case ServerMessageType.SetCharacterPosition:
-                    break;
+				case GameEventType.RemoveMultipleEnchantmentsObsolete2:
+					break;
 
-                case ServerMessageType.SetCharacterSkillLevel:
-                    break;
+				case GameEventType.InflictMeleeDamage:
+					break;
 
-                case ServerMessageType.SetCharacterSkillState:
-                    break;
+				case GameEventType.ReceiveMeleeDamage:
+					break;
 
-                case ServerMessageType.SetCharacterAttribute:
-                    break;
+				case GameEventType.OtherMeleeEvade:
+					break;
 
-                case ServerMessageType.SetCharacterVital:
-                    break;
+				case GameEventType.SelfMeleeEvade:
+					break;
 
-                case ServerMessageType.SetCharacterCurrentVital:
-                    break;
+				case GameEventType.StartMeleeAttack:
+					break;
 
-                case ServerMessageType.LifestoneMaterialize:
-                    break;
+				case GameEventType.UpdateHealth:
+					break;
 
-                case ServerMessageType.ChangeModel:
-                    break;
+				case GameEventType.AgeCommandResult:
+					break;
 
-                case ServerMessageType.ServerText:
-                    break;
+				case GameEventType.ReadyPreviousActionComplete:
+					break;
 
-                case ServerMessageType.CharacterCreationInitialization:
-                    break;
+				case GameEventType.UpdateAllegianceInfo:
+					break;
 
-                case ServerMessageType.End3DMode:
-                    break;
+				case GameEventType.CloseAssessPanel:
+					break;
 
-                case ServerMessageType.CharacterDeletion:
-                    break;
+				case GameEventType.PingReply:
+					break;
 
-                case ServerMessageType.RequestLogin:
-                    break;
+				case GameEventType.SquelchedUsersList:
+					break;
 
-                case ServerMessageType.CharacterList:
-                    break;
+				case GameEventType.EnterTrade:
+					break;
 
-                case ServerMessageType.CharacterListFailure:
-                    break;
+				case GameEventType.EndTrade:
+					break;
 
-                case ServerMessageType.MessageOfTheDay:
-                    break;
+				case GameEventType.AddTradeItem:
+					break;
 
-                case ServerMessageType.CreateObject:
-                    break;
+				case GameEventType.AcceptTrade:
+					break;
 
-                case ServerMessageType.LoginCharacter:
-                    break;
+				case GameEventType.UnAcceptTrade:
+					break;
 
-                case ServerMessageType.RemoveItem:
-                    break;
+				case GameEventType.ResetTrade:
+					break;
 
-                case ServerMessageType.SetPositionAndMotion:
-                    break;
+				case GameEventType.FailureToAddATradeItem:
+					break;
 
-                case ServerMessageType.WieldObject:
-                    break;
+				case GameEventType.FailureToCompleteATrade:
+					break;
 
-                case ServerMessageType.MoveObjectIntoInventory:
-                    break;
+				case GameEventType.DisplayDwellingPurchaseMaintenancePanel:
+					break;
 
-                case ServerMessageType.ToggleObjectVisibility:
-                    break;
+				case GameEventType.HouseInformationForOwners:
+					break;
 
-                case ServerMessageType.Animation:
-                    break;
+				case GameEventType.HouseInformationForNonOwners:
+					break;
 
-                case ServerMessageType.Jumping:
-                    break;
+				case GameEventType.HouseGuestList:
+					break;
 
-                case ServerMessageType.ApplySoundEffect:
-                    break;
+				case GameEventType.UpdateItemManaBar:
+					break;
 
-                case ServerMessageType.EnterPortalMode:
-                    break;
+				case GameEventType.HousesAvailable:
+					break;
 
-                case ServerMessageType.ApplyVisualSoundEffect:
-                    break;
+				case GameEventType.ConfirmationPanel:
+					break;
 
-                case ServerMessageType.GameEvent:
-                    DispatchGameEvent(e.Message);
-                    break;
+				case GameEventType.ConfirmationPanelClosed:
+					break;
 
-                case ServerMessageType.Start3DModeObsolete:
-                    break;
+				case GameEventType.AllegianceMemberLoginOut:
+					break;
 
-                case ServerMessageType.EnterGame:
-                    break;
+				case GameEventType.DisplayStatusMessage:
+					break;
 
-                case ServerMessageType.UpdateObject:
-                    break;
+				case GameEventType.DisplayParameterizedStatusMessage:
+					break;
 
-                case ServerMessageType.TurbineChat:
-                    break;
+				case GameEventType.SetTurbineChatChannels:
+					break;
 
-                case ServerMessageType.Start3DMode:
-                    break;
+				case GameEventType.Tell:
+					break;
 
-                case ServerMessageType.ServerMessage:
-                    break;
+				case GameEventType.CreateFellowship:
+					break;
 
-                case ServerMessageType.ServerName:
-                    break;
+				case GameEventType.DisbandFellowship:
+					break;
 
-                case ServerMessageType.UpdateResource:
-                    break;
+				case GameEventType.AddFellowshipMember:
+					break;
 
-                case ServerMessageType.DatFilePatchList:
-                    break;
+				case GameEventType.AddSpellToSpellBook:
+					break;
 
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-        }
+				case GameEventType.AddCharacterEnchantment:
+					break;
 
-        #endregion Private Methods
-    }
+				case GameEventType.RemoveCharacterEnchantment:
+					break;
+
+				case GameEventType.RemoveMultipleCharacterEnchantments:
+					break;
+
+				case GameEventType.RemoveAllCharacterEnchantmentsSilent:
+					break;
+
+				case GameEventType.RemoveCharacterEnchantmentSilent:
+					break;
+
+				case GameEventType.RemoveMultipleCharacterEnchantmentsSilent:
+					break;
+
+				case GameEventType.MildPortalStorm:
+					break;
+
+				case GameEventType.HeavyPortalStorm:
+					break;
+
+				case GameEventType.PortalStormed:
+					break;
+
+				case GameEventType.EndPortalStorm:
+					break;
+
+				case GameEventType.StatusMessage:
+					break;
+
+				default:
+					throw new ArgumentOutOfRangeException();
+			}
+		}
+
+		private void DispatchGameEvent_AcceptTrade(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_AcceptTrade?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_AddCharacterEnchantment(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_AddCharacterEnchantment?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_AddEnchantment(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_AddEnchantment?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_AddFellowshipMember(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_AddFellowshipMember?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_AddSpellToSpellBook(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_AddSpellToSpellBook?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_AddSpellToSpellBookCastSpell(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_AddSpellToSpellBookCastSpell?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_AddTradeItem(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_AddTradeItem?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_AgeCommandResult(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_AgeCommandResult?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_AllegianceInformation(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_AllegianceInformation?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_AllegianceMemberLoginOut(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_AllegianceMemberLoginOut?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_ApproachVendor(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_ApproachVendor?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_AttackCompleted(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_AttackCompleted?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_CloseAssessPanel(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_CloseAssessPanel?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_CloseContainer(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_CloseContainer?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_ConfirmationPanel(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_ConfirmationPanel?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_ConfirmationPanelClosed(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_ConfirmationPanelClosed?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_CreateFellowship(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_CreateFellowship?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_CreateFellowshipObsolete(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_CreateFellowshipObsolete?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_DeleteSpellFromSpellBook(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_DeleteSpellFromSpellBook?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_DeleteSpellFromSpellBookObsolete(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_DeleteSpellFromSpellBookObsolete?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_DirectChat(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_DirectChat?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_DisbandFellowship(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_DisbandFellowship?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_DisbandFellowshipObsolete(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_DisbandFellowshipObsolete?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_DismissMember(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_DismissMember?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_DisplayDwellingPurchaseMaintenancePanel(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_DisplayDwellingPurchaseMaintenancePanel?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_DisplayParameterizedStatusMessage(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_DisplayParameterizedStatusMessage?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_DisplayStatusMessage(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_DisplayStatusMessage?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_DropFromInventory(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_DropFromInventory?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_EndPortalStorm(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_EndPortalStorm?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_EndPortalStormObsolete(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_EndPortalStormObsolete?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_EndTrade(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_EndTrade?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_EnterTrade(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_EnterTrade?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_FailureToAddATradeItem(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_FailureToAddATradeItem?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_FailureToCompleteATrade(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_FailureToCompleteATrade?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_FailureToGiveItem(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_FailureToGiveItem?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_FellowshipMemberDismissed(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_FellowshipMemberDismissed?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_FellowshipMemberQuit(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_FellowshipMemberQuit?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_FriendsListUpdate(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_FriendsListUpdate?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_GroupChat(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_GroupChat?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_GroupChatObsolete(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_GroupChatObsolete?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_HeavyPortalStorm(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_HeavyPortalStorm?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_HeavyPortalStormObsolete(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_HeavyPortalStormObsolete?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_HouseGuestList(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_HouseGuestList?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_HouseInformationForNonOwners(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_HouseInformationForNonOwners?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_HouseInformationForOwners(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_HouseInformationForOwners?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_HousesAvailable(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_HousesAvailable?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_IdentifyObject(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_IdentifyObject?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_InflictMeleeDamage(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_InflictMeleeDamage?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_InsertInventoryItem(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_InsertInventoryItem?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_KillDeathMessage(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_KillDeathMessage?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_LoginCharacter(Message message)
+		{
+			// NOT COMPLETE
+			Host.Actions.AddChatText(string.Format("[DFilter v{0}] Initialized", Assembly.GetExecutingAssembly().GetName().Version),
+									1, 1);
+
+			GameEvent_LoginCharacter?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_MessageBox(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_MessageBox?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_MildPortalStorm(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_MildPortalStorm?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_MildPortalStormObsolete(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_MildPortalStormObsolete?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_OtherMeleeEvade(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_OtherMeleeEvade?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_PingReply(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_PingReply?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_PortalStormed(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_PortalStormed?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_PortalStormedObsolete(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_PortalStormedObsolete?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_ReadPage(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_ReadPage?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_ReadTableOfContents(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_ReadTableOfContents?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_ReadyPreviousActionComplete(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_ReadyPreviousActionComplete?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_ReceiveMeleeDamage(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_ReceiveMeleeDamage?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_RecruitMember(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_RecruitMember?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_RemoveAllCharacterEnchantmentsSilent(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_RemoveAllCharacterEnchantmentsSilent?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_RemoveCharacterEnchantment(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_RemoveCharacterEnchantment?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_RemoveCharacterEnchantmentSilent(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_RemoveCharacterEnchantmentSilent?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_RemoveEnchantment(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_RemoveEnchantment?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_RemoveEnchantmentSilent(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_RemoveEnchantmentSilent?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_RemoveMultipleCharacterEnchantments(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_RemoveMultipleCharacterEnchantments?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_RemoveMultipleCharacterEnchantmentsSilent(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_RemoveMultipleCharacterEnchantmentsSilent?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_RemoveMultipleEnchantmentsObsolete(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_RemoveMultipleEnchantmentsObsolete?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_RemoveMultipleEnchantmentsObsolete2(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_RemoveMultipleEnchantmentsObsolete2?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_ResetTrade(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_ResetTrade?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_SelfMeleeEvade(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_SelfMeleeEvade?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_SetPackContents(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_SetPackContents?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_SetTitle(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_SetTitle?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_SetTurbineChatChannels(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_SetTurbineChatChannels?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_SquelchedUsersList(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_SquelchedUsersList?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_StartMeleeAttack(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_StartMeleeAttack?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_StatusMessage(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_StatusMessage?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_Tell(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_Tell?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_TitleList(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_TitleList?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_TransactionMessage(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_TransactionMessage?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_UnAcceptTrade(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_UnAcceptTrade?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_UpdateAllegianceInfo(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_UpdateAllegianceInfo?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_UpdateHealth(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_UpdateHealth?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_UpdateItemManaBar(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_UpdateItemManaBar?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_WearItem(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_WearItem?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void DispatchGameEvent_YourDeath(Message message)
+		{
+			// NOT COMPLETE
+			GameEvent_YourDeath?.Invoke(this, EventArgs.Empty);
+		}
+
+		/// <summary>
+		/// Messages from client to server.
+		/// </summary>
+		/// <param name="message"></param>
+		private void OnClientDispatch(object sender, NetworkMessageEventArgs e)
+		{
+			ClientMessageType clientMessageType = (ClientMessageType)e.Message.Type;
+
+			switch (clientMessageType)
+			{
+				case ClientMessageType.GameAction:
+					DispatchGameAction(e.Message);
+					break;
+
+				default:
+					throw new ArgumentOutOfRangeException();
+			}
+		}
+
+		/// <summary>
+		/// Messages from server to client.
+		/// </summary>
+		/// <param name="message"></param>
+		private void OnServerDispatch(object sender, NetworkMessageEventArgs e)
+		{
+			ServerMessageType serverMessageType = (ServerMessageType)e.Message.Type;
+
+			switch (serverMessageType)
+			{
+				case ServerMessageType.DestroyObject:
+					break;
+
+				case ServerMessageType.LocalChat:
+					break;
+
+				case ServerMessageType.Attack:
+					break;
+
+				case ServerMessageType.AdjustStackSize:
+					break;
+
+				case ServerMessageType.PlayerKilled:
+					break;
+
+				case ServerMessageType.BroadcastText:
+					break;
+
+				case ServerMessageType.IndirectText:
+					break;
+
+				case ServerMessageType.EmoteText:
+					break;
+
+				case ServerMessageType.SetCoverage:
+					break;
+
+				case ServerMessageType.SetCharacterFlag:
+					break;
+
+				case ServerMessageType.SetWielderContainer:
+					break;
+
+				case ServerMessageType.SetObjectResourceObsolete:
+					break;
+
+				case ServerMessageType.UpdateStatistic:
+					break;
+
+				case ServerMessageType.UpdateLastAttacker:
+					break;
+
+				case ServerMessageType.UpdateLastCorpseLocation:
+					break;
+
+				case ServerMessageType.SkillExperience:
+					break;
+
+				case ServerMessageType.TrainSkill:
+					break;
+
+				case ServerMessageType.UpdateAttribute:
+					break;
+
+				case ServerMessageType.UpdateSecondaryAttribute:
+					break;
+
+				case ServerMessageType.VitalStatisticUpdate:
+					break;
+
+				case ServerMessageType.CreatureMessage:
+					break;
+
+				case ServerMessageType.CreatureMessageRanged:
+					break;
+
+				case ServerMessageType.SetCharacterDWord:
+					break;
+
+				case ServerMessageType.SetObjectDWord:
+					break;
+
+				case ServerMessageType.SetCharacterQWord:
+					break;
+
+				case ServerMessageType.SetCharacterBoolean:
+					break;
+
+				case ServerMessageType.SetObjectBoolean:
+					break;
+
+				case ServerMessageType.SetObjectString:
+					break;
+
+				case ServerMessageType.SetObjectResource:
+					break;
+
+				case ServerMessageType.SetCharacterLink:
+					break;
+
+				case ServerMessageType.SetObjectLink:
+					break;
+
+				case ServerMessageType.SetCharacterPosition:
+					break;
+
+				case ServerMessageType.SetCharacterSkillLevel:
+					break;
+
+				case ServerMessageType.SetCharacterSkillState:
+					break;
+
+				case ServerMessageType.SetCharacterAttribute:
+					break;
+
+				case ServerMessageType.SetCharacterVital:
+					break;
+
+				case ServerMessageType.SetCharacterCurrentVital:
+					break;
+
+				case ServerMessageType.LifestoneMaterialize:
+					break;
+
+				case ServerMessageType.ChangeModel:
+					break;
+
+				case ServerMessageType.ServerText:
+					break;
+
+				case ServerMessageType.CharacterCreationInitialization:
+					break;
+
+				case ServerMessageType.End3DMode:
+					break;
+
+				case ServerMessageType.CharacterDeletion:
+					break;
+
+				case ServerMessageType.RequestLogin:
+					break;
+
+				case ServerMessageType.CharacterList:
+					break;
+
+				case ServerMessageType.CharacterListFailure:
+					break;
+
+				case ServerMessageType.MessageOfTheDay:
+					break;
+
+				case ServerMessageType.CreateObject:
+					break;
+
+				case ServerMessageType.LoginCharacter:
+					break;
+
+				case ServerMessageType.RemoveItem:
+					break;
+
+				case ServerMessageType.SetPositionAndMotion:
+					break;
+
+				case ServerMessageType.WieldObject:
+					break;
+
+				case ServerMessageType.MoveObjectIntoInventory:
+					break;
+
+				case ServerMessageType.ToggleObjectVisibility:
+					break;
+
+				case ServerMessageType.Animation:
+					break;
+
+				case ServerMessageType.Jumping:
+					break;
+
+				case ServerMessageType.ApplySoundEffect:
+					break;
+
+				case ServerMessageType.EnterPortalMode:
+					break;
+
+				case ServerMessageType.ApplyVisualSoundEffect:
+					break;
+
+				case ServerMessageType.GameEvent:
+					DispatchGameEvent(e.Message);
+					break;
+
+				case ServerMessageType.Start3DModeObsolete:
+					break;
+
+				case ServerMessageType.EnterGame:
+					break;
+
+				case ServerMessageType.UpdateObject:
+					break;
+
+				case ServerMessageType.TurbineChat:
+					break;
+
+				case ServerMessageType.Start3DMode:
+					break;
+
+				case ServerMessageType.ServerMessage:
+					break;
+
+				case ServerMessageType.ServerName:
+					break;
+
+				case ServerMessageType.UpdateResource:
+					break;
+
+				case ServerMessageType.DatFilePatchList:
+					break;
+
+				default:
+					throw new ArgumentOutOfRangeException();
+			}
+		}
+
+		#endregion Private Methods
+	}
 }
